@@ -232,5 +232,38 @@ var vm = new Vue({
   // vm.fullName = 'John Doe' を呼ぶと、setter 関数が呼び出され、vm.firstName と vm.lastName が適切に更新されます。
 })
 
+// var class_example = new Vue({
+//   el: '#class_example',
+//   data: {
+//     isActive: true,
+//     hasError: false
+//   }
+// })
+// consoleにて
+// class_example.isActive = false
+// false
+// class_example.isActive = true
+// true
+// class_example.hasError = true
+// true → "static active text-danger"になる
 
+// 同じ結果
+// オブジェクトを返す算出プロパティを束縛することもできる
+var class_example = new Vue({
+  el: '#class_example',
+  data: {
+    classObject: {
+      active: true,
+      'text-danger': false
+    }
+  },
+  computed: {
+    classObject: function() {
+      return {
+        active: this.active && !this.error,
+        'text-danger': this.error && this.error.type === 'fatal'
+      }
+    }
+  }
+})
 
