@@ -60,6 +60,51 @@
     </app-view>
   </div>
 
+  <div id="app8">
+      <input v-model="message" id="example" type="" name="" value="">
+  </div>
+
+  <!-- ## 展開 -->
+
+  <!-- ”Mustache” 構文 -->
+  <span>Message: {{ msg }}</span>
+
+  <!-- mustache タグは、対応するオブジェクトの msg プロパティの値に置き換えられます。また、msg プロパティが変更される時、それに応じて更新されます。 -->
+
+  <span v-once>This will never change: {{ msg }}</span>
+
+  <!-- 生の HTML -->
+  <!--
+  2重中括弧の mustaches は、データを HTML ではなく、プレーンなテキストとして扱います。実際の HTML として出力するためには、v-html ディレクティブを使用する
+  -->
+
+  <p>Using mustaches: {{ rawHtml }}</p>
+  <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+
+  <div v-bind:id="dynamicId"></div>
+
+  <button v-bind:disabled="isButtonDisabled" type="">Button</button>
+
+  <!--
+  isButtonDisabled が null、undefined、または false の値を持つ場合、disabled 属性は描画された <button> 要素に含められません。
+  -->
+
+  <h3>引数</h3>
+  <div id="app10">
+    <a v-on:click="doSomething"> » Click for start doSomething</a>
+  </div>
+
+  <h3>省略記法</h3>
+  <div id="app11">
+    <a v-bind:href="url">...</a>
+    <a :href="url">...</a>
+
+    <a v-on:click="doSomething"> » Click for start doSomething</a>
+    <a @click="doSomething"> » Click for start doSomething</a>
+  </div>
+
+
+
   <script src="https://unpkg.com/vue"></script>
   <script src="./_assets/js/common.js"></script>
 </body>
