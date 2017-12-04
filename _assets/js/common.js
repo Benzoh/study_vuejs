@@ -169,3 +169,68 @@ var app11 = new Vue({
     }
   }
 })
+
+// 算出プロパティ
+var vm = new Vue({
+  el: '#example2',
+  data: {
+    message: 'Hello'
+  },
+  computed: {
+    // 算出getter関数
+    reversedMessage: function() {
+      // thisはvmインスタンス
+      return this.message.split('').reverse().join('')
+    }
+  }
+})
+
+// var vm = new Vue({
+//   el: '#demo',
+//   data: {
+//     firstName: 'Foo',
+//     lastName: 'Bar',
+//     fullName: 'Foo Bar'
+//   },
+//   watch: {
+//     firstName: function(val) {
+//       this.fullName = val + ' ' + this.lastName
+//     },
+//     lastName: function(val) {
+//       this.fullName = this.firstName + ' ' + val
+//     }
+//   }
+// })
+
+// ↑と比べて、それぞれの入力値をいちいち監視する命令が必要ない
+var vm = new Vue({
+  el: '#demo',
+  data: {
+    firstName: 'Foo',
+    lastName: 'Bar',
+  },
+
+  // computed: {
+  //   fullName: function() {
+  //     return this.firstName + ' ' + this.lastName
+  //   }
+  // }
+
+  computed: {
+    fullName: {
+      get: function() {
+        return this.firstName + ' ' + this.lastName
+      },
+      set: function(newValue) {
+        var names = newValue.split(' ')
+        this.firstName = names[0]
+        this.lastName = names[names.length - 1]
+      }
+    }
+  }
+  // consoleで
+  // vm.fullName = 'John Doe' を呼ぶと、setter 関数が呼び出され、vm.firstName と vm.lastName が適切に更新されます。
+})
+
+
+
